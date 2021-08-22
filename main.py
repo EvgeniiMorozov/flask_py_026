@@ -16,7 +16,7 @@ def add_user():
     conn = connect("shop.sqlite")
     cursor = conn.cursor()
 
-    if request.method == "GET":
+    if request.method == "POST":
         data = {
             "name": str(request.form.get("name")),
             "email": str(request.form.get("email")),
@@ -39,4 +39,4 @@ def add_user():
 
 
 if __name__ == "__main__":
-    app.run(debug=True, port=7001)
+    app.run(debug=True)
