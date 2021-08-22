@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add product</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+</head>
+<body>
+
+    <form method="POST">
+        <input id="name" type="text" name="name" placeholder="Enter product title" required>
+        <input id="description" type="text" name="description" placeholder="Enter product description" required>
+        <input id="price" type="text" name="price" placeholder="Enter product price" required>
+        <input type="button" onclick="test()">
+    </form>
+
+    <h3>
+        Вы добавили продукт {{ name }}, с описанием {{ description }} и ценой {{ price }}
+    </h3>
+
+    <script>
+        function test() {
+            $.ajax({
+            url: '/ajax_product', /* Куда пойдет запрос */
+            method: 'get', /* Метод передачи (post или get) */
+            dataType: 'html', /* Тип данных в ответе (xml, json, script, html). */
+            data: {
+                    name: document.getElementById("name").value,
+                    description: document.getElementById("description").value,
+                    price: document.getElementById("price").value
+                }, /* Параметры передаваемые в запросе. */
+            success: function(data){ /* функция которая будет выполнена после успешного запроса. */
+                alert(data);
+            }
+        });
+        }
+    </script>
+
+</body>
+</html>

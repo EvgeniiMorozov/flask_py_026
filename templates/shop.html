@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+</head>
+<body>
+    <form>
+        <label for="customers">Choose a customer:</label>
+        <select name="Customer" id="customer">
+            {% for item in customers %}
+
+            <option value="{{ item.0 }}">name of the user: {{ item.1 }}</option>
+
+            {% endfor %}
+
+        </select>
+
+        <label for="products">Choose a product:</label>
+        <select name="Product" id="product">
+            {% for item in products %}
+
+            <option value="{{ item.0 }}">name of the user: {{ item.1 }}</option>
+
+            {% endfor %}
+
+        </select>
+
+        <input type="button" value="buy" onclick="buy()">
+
+    </form>
+    <script>
+        function buy() {
+            $.ajax({
+            url: '/ajax_product', /* Куда пойдет запрос */
+            method: 'get', /* Метод передачи (post или get) */
+            dataType: 'html', /* Тип данных в ответе (xml, json, script, html). */
+            data: {
+                    customer: $( "#customer" ).val();,
+                    product: $( "#product" ).val();,
+                }, /* Параметры передаваемые в запросе. */
+            success: function(data){ /* функция которая будет выполнена после успешного запроса. */
+                alert(data);
+            }
+        });
+        }
+    </script>
+</body>
+</html>
